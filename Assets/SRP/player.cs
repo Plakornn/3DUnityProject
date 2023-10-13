@@ -9,7 +9,7 @@ public class player : MonoBehaviour
     public float w_speed, wb_speed, olw_speed, rn_speed, ro_speed;
     public bool walking;
     public Transform playerTrans;
-    public float jumpForce = 10.0f; // ปรับค่า jumpForce ให้มากขึ้นเพื่อกระโดดเร็วขึ้น
+    public float jumpForce = 2000.0f; // ปรับค่า jumpForce ให้มากขึ้นเพื่อกระโดดเร็วขึ้น
     public float gravity = 9.81f; // เพิ่มฟิลด์สำหรับค่าแรงโน้มถ่วง
 
     private bool isGrounded = false; // เพิ่มตัวแปรสำหรับตรวจสอบการแตะพื้น
@@ -87,14 +87,19 @@ public class player : MonoBehaviour
             }
         }
         if (Input.GetKeyDown(KeyCode.Space))
+    {
+        if (IsGrounded())
         {
-            if (IsGrounded())
-            {
-                float jumpSpeed = Mathf.Sqrt(2 * jumpForce * Mathf.Abs(Physics.gravity.y));
-                playerRigid.velocity = new Vector3(playerRigid.velocity.x, jumpSpeed, playerRigid.velocity.z);
-                playerAnim.SetTrigger("jump");
-            }
+            // คำนวณความเร็วในแกน y สำหรับกระโดด
+            float jumpSpeed = Mathf.Sqrt(2 * jumpForce * Mathf.Abs(Physics.gravity.y));
+
+            // ตั้งค่าความเร็วในแกน y ของ Rigidbody
+            playerRigid.velocity = new Vector3(playerRigid.velocity.x, jumpSpeed, playerRigid.velocity.z);
+
+            // เรียกการเปลี่ยนสถานะใน Animator เป็น "jump"
+            playerAnim.SetTrigger("jump");
         }
+    }
 		
     }
 
@@ -116,6 +121,7 @@ public class player : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("OnCollisionEnter: " + collision.gameObject.name);
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
@@ -124,6 +130,7 @@ public class player : MonoBehaviour
 
     void OnCollisionExit(Collision collision)
     {
+        Debug.Log("OnCollisionExit: " + collision.gameObject.name);
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = false;
