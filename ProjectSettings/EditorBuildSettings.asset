@@ -6,9 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/PlayGame.unity
+    guid: e3536433e15834f4789792f78b768bdf
+  - enabled: 1
     path: Assets/Scenes/Desert.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    guid: d37496ed51b540b4ab95a98e73d6c4ce
   - enabled: 1
     path: Assets/Scenes/Scenes.unity
     guid: 14416c92c4560bf40b5018cab87f2d3b
+  - enabled: 1
+    path: Assets/Scenes/lose&Score.unity
+    guid: 4a847bec68211874ca6f49b35d3ea36b
+  - enabled: 1
+    path: Assets/Scenes/Winner&Score.unity
+    guid: 241e3afd0bf149a408124b16db4329ed
   m_configObjects: {}
