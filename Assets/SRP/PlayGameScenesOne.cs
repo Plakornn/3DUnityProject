@@ -2,23 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI; 
 
 public class PlayGameScenesOne : MonoBehaviour
 {
-    IEnumerator OnMouseDown()
+    public Button playButton; 
+
+    private void Start()
     {
-        yield return new WaitForSeconds(0f);
+        playButton.onClick.AddListener(PlayGame);
+    }
+
+    private void PlayGame()
+    {
         Debug.Log("isClick");
-        SceneManager.LoadScene("scene1");
-    }
-
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
+        PlayerPrefs.DeleteKey("Score"); 
+        PlayerPrefs.DeleteKey("HP");
+        SceneManager.LoadScene(1);
     }
 }

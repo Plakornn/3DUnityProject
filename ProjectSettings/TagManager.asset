@@ -7,6 +7,8 @@ TagManager:
   - Ground
   - Score
   - Coin
+  - HP
+  - Lava
   layers:
   - Default
   - TransparentFX
